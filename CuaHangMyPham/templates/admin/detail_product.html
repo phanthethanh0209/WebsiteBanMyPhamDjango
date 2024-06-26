@@ -1,0 +1,74 @@
+{% extends "pages/layoutAd.html" %}
+{% block title %}
+    Trang chủ admin
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<style>
+    .product-card {
+        margin: 20px 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .product-card img {
+        max-height: 500px;
+        width: 100%;
+        object-fit: cover;
+        border-bottom: 1px solid #ddd;
+    }
+    .product-card-header {
+        background-color: #007bff;
+        color: white;
+        padding: 15px 20px;
+        font-size: 1.25rem;
+        text-align: center;
+    }
+    .product-card-body {
+        padding: 20px;
+        text-align: center;
+    }
+    .product-card h3 {
+        margin-top: 20px;
+        font-size: 1.75rem;
+        color: #333;
+    }
+    .product-card p {
+        margin: 10px 0;
+        font-size: 1rem;
+        color: #555;
+    }
+    .product-card p span {
+        font-weight: bold;
+        color: #007bff;
+    }
+</style>
+
+<div class="container mt-5">
+    {% for sp in DMSP %}
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card product-card">
+                <div class="product-card-header">
+                    Chi Tiết Sản Phẩm
+                </div>
+                <div class="product-card-body">
+                    <img src="{% static 'img/' %}{{ sp.image }}" alt="Hình ảnh sản phẩm">
+                    <h3>{{ sp.name }}</h3>
+                    <p>Loại: <span>{{ sp.category }}</span></p>
+                    <p>Thương Hiệu: <span>{{ sp.brand }}</span></p>
+                    <p>Giá: <span>{{ sp.price }}</span></p>
+                    <p>Mô Tả: <span>{{ sp.description }}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    {% load static %}
+    <link href="{% static 'Content/bootstrap.css'%}" rel="stylesheet" />
+    <link href="{% static 'root/img/logo.png'%}" rel="icon" />
+    <link href="{% static 'Content/font-awesome.css'%}" rel="stylesheet" /> <!--Link lấy icon sx tăng/giảm-->
+    <script src="{% static 'Scripts/jquery-3.7.1.js'%}"></script>
+    <script src="{% static 'Scripts/jquery.validate.js'%}"></script>
+    <script src="{% static 'Scripts/jquery.validate.unobtrusive.js'%}"></script>
+    <script src="{% static 'Scripts/showReview.js'%}"></script>
+    <style>
+        .lst_custom {
+            transition: background 0.5s all ease-in-out;
+        }
+
+            .lst_custom:hover {
+                background: linear-gradient(90deg,white 50%, #fff1f3 50%);
+                background-size: 200% 100%;
+                background-position: -100% 0;
+                font-weight: bold;
+            }
+
+            .lst_custom a {
+                padding-left: 0;
+                text-decoration: none;
+                color: black;
+                font-weight: bold;
+            }
+
+                .lst_custom a:hover {
+                    color: red;
+                    padding-left: 20px;
+                    transition: 0.3s all ease-in-out;
+                }
+    </style>
+</head>
+<body>
+    <!-- @{
+        var modell = 0;
+    } -->
+    <div class="container-fluid">
+
+        <!--Left Dashboard-->
+
+        <div class="row">
+
+            <!--Sidebar-->
+
+            <div class="col-2 p-0 m-0" style="min-height: 800px;background-color: #f3d8da;">
+                <div class="container-fluid p-0 m-0 w-100">
+                    <div class="text-center">
+                        <img src="{% static 'root/img/logo.png'%}" class="img-fluid w-50 m-auto my-3" alt="Alternate Text" />
+                    </div>
+
+                    <ul class="list-group rounded-0">
+                        <li class="list-group-item px-4 pt-3 pb-3 lst_custom"><a href="/admin/categorys">Quản lý loại hàng</a></li>
+                        <li class="list-group-item px-4 pt-3 pb-3 lst_custom"><a href="/admin/brands">Quản lý thương hiệu</a></li>
+                        <li class="list-group-item px-4 pt-3 pb-3 lst_custom"><a href="/admin/products">Quản lý sản phẩm</a></li>
+                        <li class="list-group-item px-4 pt-3 pb-3 lst_custom"><a href="/admin/orders">Quản lý đơn hàng</a></li>
+                        <li class="list-group-item px-4 pt-3 pb-3 lst_custom"><a href="/admin/users">Quản lý người dùng</a></li>
+                        <li class="list-group-item px-4 pt-3 pb-3 lst_custom"><a href="/">Đến trang mua bán</a></li>
+                        <li class="list-group-item px-4 pt-3 pb-3 lst_custom"> 
+                            {% if request.session.email %}
+                            <div class="signup">
+                                <a href="/logout"> ↩️ Đăng xuất</a>
+                            </div>
+                            {% else %}
+                            <div class="signup">
+                                <a href="/login">Đăng nhập</a>
+                            </div>
+                            {% endif %}
+                        <li>
+                    </ul>
+
+                </div>
+            </div>
+
+
+
+            <!--Right Dashboard-->
+
+            <div class="col-10" style=" background-color:#fff1f3">
+
+                <!--Header-->
+
+                
+
+                <!--Content Body-->
+                {% block content %}
+                {% endblock %}
+
+
+            </div>
+        </div>
+    </div>
+
+    <!--Footer-->
+
+
+    <div class="container-fluid p-0 m-0 text-center border border-1" style="background-color:#fff1f3">
+        <h6 class="p-3 m-0">The Face Shop Admin 2024. &#169; Copyright by <span class="text-danger fw-bolder">BLUE SKY TEAM</span>. All Rights Reserved.</h6>
+    </div>
+    <script>
+        $(document).ready(() => {
+            $.ajax({
+                type: 'GET',
+                url: '/api/QL_DonHang',
+                success: (responses) => {
+                    for (var i = 0; i <= responses.length; i++) {
+                        const hdRow = responses[i];
+                        const strHTML = '<tr><td>' + hdRow.MaHD + '</td><td>' + hdRow.TenKH + '</td><td>' + hdRow.NgayLap + '</td><td>' + hdRow.SDT + '</td><td>' + hdRow.DiaChi + '</td><td>' + hdRow.Email + '</td><td class="text-center"> <a class="text-decoration-none icon-link-hover fs-5" href="/Admin/QL_DonHang/XemChiTiet/  ' + hdRow.MaHD + '">ℹ️</a></td></tr > ';
+                        $('.hdtable').append(strHTML);
+                    }
+                },
+                error: (err) => { console.log(err); }
+            });
+        });
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

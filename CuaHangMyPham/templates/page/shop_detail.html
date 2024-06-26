@@ -1,0 +1,342 @@
+{% extends "pages/layout.html" %}
+{% block title %}
+    Chi tiết sản phẩm
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+
+
+<!-- @section jsFooter {
+    <script src="/root/js/controller/cartController.js"></script>
+} -->
+<div id="content">
+    <div class="container-lg ">
+        <div class="row ">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="product-card d-flex justify-content-center">
+                    <img src="{% static 'img/' %}{{ DM_SanPham.image }}" alt="{{ DM_SanPham.name }}">
+                </div>
+                <!-- @*<p class="img-small">
+                        <img src="~/root/img/son1.png" alt="" class="thumbnail">
+                        <img src="~/root/img/son-small-1.png" alt="" class="thumbnail">
+                        <img src="~/root/img/son-small-2.png" alt="" class="thumbnail">
+                        <img src="~/root/img/son-small-3.png" alt="" class="thumbnail">
+                    </p>*@
+                @*<script src="~/root/js/slide.js"></script>*@ -->
+                <div class="share-icon d-flex justify-content-center align-items-center">
+                    <div>Chia sẻ</div>
+                    <div><a class="icon-fb" target="_blank" href="https://www.facebook.com/"><i class="ti-facebook "></i></a></div>
+                    <div><a class="icon-twitter" target="_blank" href="https://twitter.com/?lang=vi"><i class="ti-twitter "></i></a></div>
+                    <div><a class="icon-ins" target="_blank" href="https://www.instagram.com/"><i class="ti-instagram "></i></a></div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6  col-sm-12">
+                <div class="first-info-product">
+                    <div class="brand-product">
+                        <a href="#">3CE</a>
+                    </div>
+                    {{ DM_SanPham.name }}
+                    <div class="status-product font-18px  d-flex align-items-center ">
+                        <div>Tình trạng: <span class="main-color">Còn hàng</span></div>
+                        <div>Mã sản phẩm: <span class="main-color">{{ DM_SanPham.name }}</span></div>
+                        <!-- <div>Thương hiệu: <span class="main-color">@Model.TenThuongHieu</span></div> -->
+                    </div>
+                    <div class="rating-box font-18px d-flex align-items-center ">
+                        <div class="text-rate">Đánh giá: </div>
+                        <div class="rating-star d-flex align-items-center">
+                            <i class="star-gold fa-solid fa-star"></i>
+                            <i class="star-gold fa-solid fa-star"></i>
+                            <i class="star-gold fa-solid fa-star"></i>
+                            <i class="star-gold fa-solid fa-star"></i>
+                            <i class=" fa-solid fa-star"></i>
+                        </div>
+                        <div class="quantity-rating">(324)</div>
+                    </div>
+                </div>
+
+                <div class="second-info-product">
+                    <div class="price d-flex align-items-center">
+                        <span class="price-new">{{ DM_SanPham.price }}</span><span class="VND-new"></span>
+                        <span class="vnd">₫</span>
+                        <span class="price-old">330.000₫ </span>
+                        <span class="sale-percent">15%</span>
+                    </div>
+                    <div class="save-money font-18px">
+                        (Tiết kiệm: <span class="main-color">55.000</span>
+                        <span class="vnd">₫</span>)
+                    </div>
+                    <div class="information-product font-18px d-flex flex-column">
+                        <div class="details">
+                            <div class="details-box d-flex align-items-center">
+                                <div class="title-details">Năm sản xuất:</div>
+                                <div class="property">2023</div>
+                            </div>
+                            <!-- @*<div class="details-box d-flex align-items-center">
+                                    <div class="title-details">Giới tính:</div>
+                                    <div class="property">Nữ</div>
+                                </div>*@ -->
+                            <div class="details-box d-flex align-items-center">
+                                <div class="title-details">Phong cách:</div>
+                                <div class="property">Sang trọng, quyến rũ, ngọt ngào</div>
+                            </div>
+                            <div class="details-box d-flex align-items-center">
+                                <div class="title-details">Ưu đãi:</div>
+                                <div class="property">Freeship Hà Nội & TP.HCM</div>
+                            </div>
+                        </div>
+                        <div class="box-countdown">
+                            <div class="hot-deals d-flex align-items-center p-8">
+                                <div class="text">
+                                    <p class="so-hot">Ưu đãi hot, đừng bỏ lỡ!!</p>
+                                    <p>Sản phẩm sẽ trở về giá gốc khi hết giờ</p>
+                                </div>
+                                <div class="countdown d-flex align-items-center">
+                                    <div class="item flex flex-column-reverse align-items-center">
+                                        <p>Giờ</p>
+                                        <span id="hours"></span>
+                                    </div>
+                                    <div class="item flex flex-column-reverse align-items-center">
+                                        <p>Phút</p>
+                                        <span id="min"></span>
+                                    </div>
+                                    <div class="item flex flex-column-reverse align-items-center">
+                                        <p>Giây</p>
+                                        <span id="sec"></span>
+                                    </div>
+                                </div>
+                                <script src="{% static 'js/countdown.js' %}"></script>
+                            </div>
+                            <div class="best-selling">
+                                <div class="icon-fire">
+                                    <p> 🔥 Bán chạy</p>
+                                </div>
+                                <div class="best-selling-bar ">
+                                    <div class="sold-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="buy-amount d-flex align-items-center">
+                            <div class="quantity-text">Số lượng: </div>
+                            <button class="d-flex align-items-center justify-content-center minus-btn" onclick="handleMinus()"><i class="ti-minus"></i></button>
+                            <input type="text" name="amount" id="amount" value="1">
+                            <button class="d-flex align-items-center justify-content-center plus-btn" onclick="handlePlus()"><i class="ti-plus"></i></button>
+                            <script src="{% static 'js/handlePlus-Minus.js' %}"></script>
+                        </div>
+
+                        <div class="btn-actions d-flex align-items-center justify-content-center">
+                            <button id="btn-buynow" class="btn-buynow">
+                                <a href="/addCart/?action=addcart&id_product={{ DM_SanPham.id }}" class="text d-block text-black ">Thêm vào giỏ hàng</a>
+                            </button>   
+                        </div>
+                    </div>
+                </div>
+                <div class="commit-product d-flex flex-column">
+                    <div class="endow row">
+                        <div class="item col-md-6  d-flex align-items-center">
+                            <img src="{% static 'img/icon-ship.png' %}" alt="">
+                            <span class="">Giao hàng nhanh toàn quốc</span>
+                        </div>
+                        <div class="item col-md-6  d-flex align-items-center">
+                            <img src="{% static 'img/icon-gift.png' %}" alt="">
+                            <span class="">Luôn kèm quà tặng khi mua</span>
+                        </div>
+                    </div>
+                    <div class="endow row">
+                        <div class="item col-md-6  d-flex align-items-center ">
+                            <img src="{% static 'img/icon-coupon.png' %}" alt="">
+                            <span class="">Cấp mã Coupon tiết kiệm cho bạn hằng tuần</span>
+                        </div>
+                        <div class="item col-md-6  d-flex align-items-center  ">
+                            <img src="{% static 'img/icon-commit.png' %}" alt="">
+                            <span class="">Cam kết chính hãng, bồi thường 200% nếu phát hiện hàng giả</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!--Mã giảm giá-->
+            <!-- @*<div class="col-lg-2 col-md-6 pt-4">
+                    <div class="sale-code">
+                        <div class="section-coupons">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-6 col-sm-6 mb-3">
+                                        <div class="coupon_item">
+                                            <div class="coupon-body">
+                                                <div class="coupon-head">
+                                                    <h4 class="coupon-title">NHẬP MÃ: <span id="code-snippet">BEU35</span> </h4>
+                                                    <div class="coupon-desc">Giảm 35k cho đơn hàng từ 500,000</div>
+                                                </div>
+                                                <div>
+                                                    <button class="btn-copy" id="copy-button">
+                                                        <span>Sao chép mã</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12 col-md-6 col-sm-6 mb-3">
+                                        <div class="coupon_item">
+                                            <div class="coupon-body">
+                                                <div class="coupon-head">
+                                                    <h4 class="coupon-title">NHẬP MÃ: <span id="code-snippet">BSC18</span> </h4>
+                                                    <div class="coupon-desc">Giảm 35k cho đơn hàng từ 500,000</div>
+                                                </div>
+                                                <div>
+                                                    <button class="btn-copy" id="copy-button">
+                                                        <span>Sao chép mã</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>*@ -->
+
+
+
+        </div>
+
+
+        <div class="row mt-3">
+            <div class="col-lg-12">
+                <!-- tab items -->
+                <div class="tabs d-flex justify-content-center align-items-center">
+                    <!-- @*<div class="tab-item active">Mô tả sản phẩm</div>*@
+                    <div class="tab-item">Thông tin sản phẩm</div>
+                    @*<div class="tab-item">Thông số sản phẩm</div>
+                        <div class="tab-item">Hướng dẫn sử dụng</div>*@ -->
+                    <div class="line"></div>
+                </div>
+
+                <!-- tab content -->
+                <div class="tab-content">
+                    <!-- @*<div class="tab-pane active">
+                            <p class="content-tabs">
+                                Son thỏi lì mịn môi Maybelline Ultimatte By Color Sensational Matte Lipstick là son thỏi lì đến từ thương hiệu Maybelline với 3 tính năng mềm, mượt, mịn tạo hiệu ứng mờ không để lộ vân môi mang đến lớp finish mịn mờ sang
+                                trọng kết hợp công nghệ ultrafine powder cho son mịn lì nhẹ tênh.
+                            </p>
+                            <p class="tab-img">
+                                <img src="~/root/img/son-small-3.png" alt="">
+                            </p>
+
+                            <p class="content-tabs">
+                                Son môi này là hoàn hảo cho bất cứ ai tìm kiếm một công thức dưỡng ẩm lâu dài. Son Thỏi MAYBELLINE Mịn Môi Siêu Nhẹ 899 Đỏ Gạch 1.7g Color Sensational là sự kết hợp độc đáo giữa son môi và son tint, có nghĩa là nó mang
+                                đến những điều tốt nhất của cả hai thế giới. Công thức nhẹ, tạo cảm giác thoải mái khi thoa cả ngày và có độ lên màu cao sẽ khiến đôi môi của bạn trở nên nổi bật. Thêm vào đó, màu Sepia là một màu đỏ gạch đậm, tuyệt
+                                đẹp sẽ bổ sung cho bất kỳ màu da nào.
+                            </p>
+                            <p class="tab-img">
+                                <img src="~/root/img/son-tab-ui-1.png" alt="">
+                            </p>
+
+                            <p>Son Thỏi Lì, Siêu Nhẹ, Mịn Môi Maybelline Ultimatte By Color Sensational Matte Lipstick có những tông màu sau:
+                            <p> 199 - More Ruby: Đỏ hồng</p>
+                            <p>288 - More Auburn: Đỏ nâu</p>
+                            <p>299 - More Scarlet: Đỏ thuần </p>
+                            <p>399 - More Magenta: Hồng đào </p>
+                            <p>499 - More Blush: Hồng đất </p>
+                            <p>799 - More Taupe: Cam ngả đất</p>
+                            <p>899 - More Rust: Đỏ gạch</p>
+                            <p>1299 - More Spice: Đỏ cam đất </p>
+                            <p class="tab-img">
+                                <img src="~/root/img/son-small-2.png" alt="">
+                                <img src="~/root/img/son-small-1.png" alt="">
+                                <img src="~/root/img/son-tab-ui-3.png" alt="">
+                                <img src="~/root/img/son-tab-ui-2.png" alt="">
+                                <img src="~/root/img/son-tab-ui-5.png" alt="">
+                                <img src="~/root/img/son-tab-ui-6.png" alt="">
+                                <img src="~/root/img/son-tab-ui-7.png" alt="">
+                                <img src="~/root/img/son-tab-ui-4.png" alt="">
+                            </p>
+                        </div>*@ -->
+
+                    <!-- <div class="tab-pane active  ">
+                        <div class="table-info d-flex justify-content-around">
+                            <table class="bg-white table table-bordered" style="width:850px">
+                                <tr>
+                                    <th width="150px">Tên sản phẩm</th>
+                                    <td>@Model.TenSP</td>
+                                    <td rowspan="5" style="position:relative; width: 35%;">
+                                        <img class="d-block m-auto w-75" style="position: absolute; top: 50%;left:50%; transform: translateY(-50%) translateX(-50%); " src="~/Content/images/@Model.TenHinh" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Thương Hiệu</th>
+                                    <td>@Model.TenThuongHieu</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Công dụng</th>
+                                    <td>@ViewBag.TenDanhMuc</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Giá</th>
+                                    <td>@string.Format("{0:N0}", @Model.DonGiaBan) đ</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Loại </th>
+                                    <td>@Model.TenLoai </td>
+                                </tr>
+
+                            </table>
+                            @*<div>
+                                    <img class="d-block m-auto w-75" src="~/Content/images/@Model.TenHinh"  />
+                                </div>*@
+
+                        </div>
+                    </div> -->
+                    <!-- <div class="mt-2">
+                        @Model.MoTa
+                    </div> -->
+
+                    <!-- @*<div class="tab-pane ">
+                            <p>
+                                Water, Dimethicone, Dimethicone/Vinyl Dimethicone Crosspolymer, Glycerin, Alcohol Denat., Pentylene Glycol, Polyglyceryl-10 Myristate, Polyacrylate Crosspolymer-6, Butylene Glycol, Dimethicone Crosspolymer, Ceteareth-20,
+                                Ethylhexylglycerin, Trisodium Ethylenediamine Disuccinate, Arginine, Aluminum Hydroxide, Ammonium Polyacrylate, Carbomer, Phenoxyethanol, Fragrance(Parfum), Titanium Dioxide (CI 77891), Acid Red 18 (CI 16255), Yellow
+                                6 (CI 15985), Red 33 (CI 17200), Yellow 5 (CI 19140), Blue 1 (CI 42090)
+                            </p>
+                        </div>
+                        <div class="tab-pane ">
+                            <p><b> Cách sử dụng:</b> Lấy một lượng nhỏ son môi và thoa nhẹ nhàng lên môi.</p>
+                            <p><b> Bảo quản:</b> Nơi khô ráo, thoáng mát. Tránh ánh nắng trực tiếp.</p>
+                            <p><b> HSD:</b> Xem trên bao bì sản phẩm.</p>
+                            <p>
+                                <b>Lưu ý khi sử dụng: </b>
+                                <ul>
+                                    <li>Nếu bạn gặp các triệu chứng sau trong hoặc sau khi sử dụng, vui lòng tạm ngừng sử dụng và hỏi ý kiến bác sĩ: đốm đỏ, sưng tấy, ngứa ngáy hoặc bất kỳ tác dụng phụ nào khác.</li>
+                                    <li>Không sử dụng sản phẩm trên vết thương hoặc bất kỳ vùng da nào bị kích ứng.</li>
+                                </ul>
+                            </p>
+                            <p>
+                                <b>Lưu ý về bảo quản: </b>
+                                <ul>
+                                    <li>Để xa tầm tay trẻ em.</li>
+                                    <li>Tránh ánh nắng trực tiếp.</li>
+                                </ul>
+                            </p>
+                            <br>
+                            <p>Để biết thêm thông tin chi tiết về sản phẩm hoặc chương trình khuyến mãi Quý khách hàng vui lòng liên hệ bộ phận CSKH qua Hotline 19004449 hoặc fanpage <a target="_blank" href="https://www.facebook.com/">BeautySecretCosmetic Vietnam</a>                                    để được hỗ trợ</p>
+                            <p>- Nếu quý khách hàng có nhu cầu xuất hóa đơn, vui lòng điền thông tin xuất hóa đơn vào mục Ghi chú đơn hàng, Bộ phận CSKH sẽ gửi hóa đơn điện tử vào email Quý Khách hàng đã đăng ký với BeautySecretCosmetic</p>
+                            <p>The Face Shop xin chân thành cảm ơn Quý khách!</p>
+                        </div>*@ -->
+                </div>
+                <!-- @*<script src="~/root/js/tab_UI.js"></script>*@ -->
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
